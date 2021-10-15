@@ -20,12 +20,17 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && foodCount >= settings.maxFood)
         {
-            if(growAction != null)
+            if (growAction != null)
                 growAction.Invoke();
 
             foodCount = 0;
             ScoreCount.foodScore = 0;
         }
+
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 lookDirection = mousePos - transform.position;
+        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
     void OnTriggerEnter2D(Collider2D coll)
     {

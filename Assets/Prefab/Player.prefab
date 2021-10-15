@@ -123,9 +123,9 @@ MonoBehaviour:
   growAction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 11500000, guid: 6face4da7d3b76443b8d171d19258cd5, type: 3}
         m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: LevelUp
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -169,7 +169,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!222 &7657150369563815703
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -52,6 +52,9 @@ TagManager:
   - name: Player
     uniqueID: 7212025
     locked: 0
+  - name: Appearance
+    uniqueID: 3456647557
+    locked: 0
   - name: UI
     uniqueID: 584761637
     locked: 0
