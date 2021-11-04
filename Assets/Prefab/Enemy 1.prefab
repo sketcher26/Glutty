@@ -93,10 +93,12 @@ GameObject:
   - component: {fileID: 687161470403950510}
   - component: {fileID: 7565697609591053612}
   - component: {fileID: 531497285527204702}
-  - component: {fileID: 8144643281019580992}
+  - component: {fileID: 6142876175472149042}
+  - component: {fileID: 3508787766233601223}
+  - component: {fileID: -1343824526108574207}
+  - component: {fileID: -2803357275733932009}
   - component: {fileID: 7076681532028508659}
   - component: {fileID: 1679641253427756074}
-  - component: {fileID: 7870571889265856763}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: Enemy
@@ -113,7 +115,7 @@ Transform:
   m_GameObject: {fileID: 6312278445802359875}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 30, y: 30, z: 1}
+  m_LocalScale: {x: 30, y: 30, z: 0}
   m_Children:
   - {fileID: 1931496706466512936}
   m_Father: {fileID: 0}
@@ -160,7 +162,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.8773585, g: 0.048514538, b: 0, a: 1}
+  m_Color: {r: 0.8962264, g: 0, b: 0.055138074, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -182,10 +184,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01cceb5ac77bc3a4cb9d564671cc621d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 100
-  shootingPoint: {fileID: 1931496706466512936}
-  bulletPrefab: {fileID: 7981689054731854514, guid: ac61d23a176c536468b2ddab52a593cf, type: 3}
---- !u!114 &8144643281019580992
+  movement: {fileID: 3508787766233601223}
+  shooting: {fileID: -1343824526108574207}
+  foodCollectRadius: 15
+  arriveDistance: 0.5
+  movementOffset: 3
+--- !u!114 &6142876175472149042
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,13 +198,97 @@ MonoBehaviour:
   m_GameObject: {fileID: 6312278445802359875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9de42559eef8c94d9bd20f7f55187ac, type: 3}
+  m_Script: {fileID: 11500000, guid: dbce51d0e5708124cb1362dfdeac66c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnObject: {fileID: 1206510558967191954, guid: c120aca001dc73240b3abdfa6c772f97, type: 3}
-  destination: {fileID: 0}
-  speed: 10
-  offset: 5
+  foodCollected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 531497285527204702}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: AddFood
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3508787766233601223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6312278445802359875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a873cf3e29178004d8bf17351928efae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1679641253427756074}
+  speed: 20
+  xMax: 0
+  yMax: 0
+--- !u!114 &-1343824526108574207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6312278445802359875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ea19b47c0741724fbeeaa478d81e38c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 50
+  shootingPoint: {fileID: 1931496706466512936}
+  bulletPrefab: {fileID: 7981689054731854514, guid: ac61d23a176c536468b2ddab52a593cf, type: 3}
+  shot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 531497285527204702}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: RemoveFood
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-2803357275733932009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6312278445802359875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbce51d0e5708124cb1362dfdeac66c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodCollected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 531497285527204702}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: AddFood
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!58 &7076681532028508659
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -238,11 +326,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!222 &7870571889265856763
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6312278445802359875}
-  m_CullTransparentMesh: 0

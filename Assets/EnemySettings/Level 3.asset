@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 183d43cad3003c642a25f793457d0024, type: 3}
-  m_Name: DefaultSettings
+  m_Script: {fileID: 11500000, guid: a3f61bcda5ce09d4c9930b0cb0a49827, type: 3}
+  m_Name: Level 3
   m_EditorClassIdentifier: 
-  speed: 40
-  scale: {x: 30, y: 30}
-  playerColor: {r: 0.9716981, g: 0, b: 0.7078917, a: 1}
-  maxFood: 10
-  newMovementOffset: 3
+  speed: 0
+  scale: {x: 0, y: 0}
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
+  maxFood: 0
+  newMovementOffset: 0

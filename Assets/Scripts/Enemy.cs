@@ -1,48 +1,97 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float attackRange = 20f;
-    [SerializeField] public Transform shootingPoint;
-    [SerializeField] private GameObject bulletPrefab;
-    private float foodCount = 0f;
+    [SerializeField] private Movement movement;
+    [SerializeField] private Shooting shooting;
+    [SerializeField] private float foodCollectRadius = 15f;
+    [SerializeField] private float arriveDistance = 0.5f;
+    [SerializeField] private float movementOffset = 5f;
+    private bool targetAcquired;
+    private Vector3 targetPos;
+
+    private int foodCount = 0;
     private GameObject player;
-    private GameObject bulletInst;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
-
-    void Update()
+    void FixedUpdate()
     {
-        if (foodCount >= 1f && Vector2.Distance(player.transform.position, transform.position) <= attackRange)
+        Vector3 worldTargetPos = GetTargetPos();
+
+        Vector2 direction = (worldTargetPos - transform.position).normalized;
+        movement.MoveInDirection(direction);
+
+        bool canShootAtPlayer = foodCount >= 1 && Vector2.Distance(player.transform.position, transform.position) <= shooting.ShootingRange;
+        CheckClosestFood();
+
+        Vector2 rotateTowardsTarget = worldTargetPos;
+
+        if (canShootAtPlayer)
         {
-            Vector2 lookDirection = player.transform.position - transform.position;
-            float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, angle);
-            Invoke("Shoot", 1);
+            rotateTowardsTarget = player.transform.position;
+            shooting.ShootWithDelay();
         }
 
+        movement.RotateTowardsTarget(rotateTowardsTarget);
+        CheckTargetReached(worldTargetPos);
     }
-    void OnTriggerEnter2D(Collider2D coll)
+
+    private void CheckTargetReached(Vector3 targetPos)
     {
-        GameObject collidedWith = coll.gameObject;
-        if (collidedWith.CompareTag("Food"))
+        if (Vector2.Distance(transform.position, targetPos) < arriveDistance)
         {
-            foodCount += 1f;
-            Destroy(collidedWith);
+            targetAcquired = false;
         }
     }
 
-    void Shoot()
+    private void CheckClosestFood()
     {
-        if (bulletInst == null)
+        var food = FoodSpawn.Instance.Food;
+        float minDistanceToFood = float.MaxValue;
+        GameObject closestFood = null;
+
+        foreach (GameObject piece in food)
         {
-            bulletInst = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
-            foodCount -= 1f;
+            var distanceToFoodPiece = Vector2.Distance(transform.position, piece.transform.position);
+
+            if (distanceToFoodPiece < foodCollectRadius && distanceToFoodPiece < minDistanceToFood)
+            {
+                minDistanceToFood = distanceToFoodPiece;
+                closestFood = piece;
+            }
         }
+
+
+        if (closestFood != null)
+        {
+            targetPos = closestFood.transform.position;
+            targetAcquired = true;
+        }
+    }
+
+    private Vector3 GetTargetPos()
+    {
+        if (targetAcquired)
+            return targetPos;
+
+        targetPos = CameraPositionHelper.GetRandomPointInCameraBounds(movementOffset);
+        targetAcquired = true;
+        return targetPos;
+    }
+
+    public void AddFood()
+    {
+        foodCount += 1;
+    }
+
+    public void RemoveFood()
+    {
+        foodCount -= 1;
     }
 }

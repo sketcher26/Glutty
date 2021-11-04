@@ -1,36 +1,44 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class FoodSpawn : MonoBehaviour
 {
     [SerializeField] GameObject spawnObject;
     [SerializeField] float initialDelay;
     [SerializeField] float repeatDelay;
-    [SerializeField] float spawnCount = 3f;
+    [SerializeField] float maxSpawnCount = 3f;
     [SerializeField] float offset = 5f;
-    private GameObject[] getCount;
+    private List<GameObject> food;
+    public List<GameObject> Food => food;
+    
 
+
+    public static FoodSpawn Instance; // входная точка
+
+    void Awake()
+    {
+        food = new List<GameObject>();
+        Instance = this;
+    }
 
     void Start()
     {
-        InvokeRepeating("ObjectSpawn", initialDelay, repeatDelay);
-    }
-    void Update()
-    {
-        getCount = GameObject.FindGameObjectsWithTag("Food");
+        InvokeRepeating("SpawnFood", initialDelay, repeatDelay);
     }
 
-    void ObjectSpawn()
+    void SpawnFood()
     {
-        if (getCount.Length < spawnCount)
+        if (food.Count < maxSpawnCount)
         {
-            var min = Camera.main.ScreenToWorldPoint(Vector2.zero);
-            var xMax = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0));
-            var yMax = Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height));
-            float screenX = Random.Range(min.x + offset, xMax.x - offset);
-            float screenY = Random.Range(min.y + offset, yMax.y - offset);
-
-            Vector2 spawnPoint = new Vector2(screenX, screenY);
-            Instantiate(spawnObject, spawnPoint, Quaternion.identity);
+            Vector2 spawnPoint = CameraPositionHelper.GetRandomPointInCameraBounds(offset);
+            GameObject foodPiece = Instantiate(spawnObject, spawnPoint, Quaternion.identity);
+            food.Add(foodPiece);
         }
+    }
+
+    public void DestroyFood(GameObject foodPiece)
+    {
+        food.Remove(foodPiece);
+        Destroy(foodPiece);
     }
 }

@@ -6,21 +6,29 @@ public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private Player player;
     [SerializeField] private PlayerSettings[] settings;
-    [SerializeField] private int currentLevel = 0;
+    [SerializeField] private int playerCurrentLevel = 0;
+    public PlayerSettings[] Settings => settings;
+    public int CurrentLevel => playerCurrentLevel;
+    public static PlayerManager Manager;
+
+    void Awake()
+    {
+        Manager = this;
+    }
 
     void Start()
     {
-        player.SetSettings(settings[currentLevel]);
+        player.SetSettings(settings[playerCurrentLevel]);
     }
-    public void LevelUp()
+    public void PlayerLevelUp()
     {
-        if (currentLevel + 1 >= settings.Length)
+        if (playerCurrentLevel + 1 >= settings.Length)
         {
             return;
         }
-        currentLevel += 1;
+        playerCurrentLevel += 1;
 
-        PlayerSettings currentSettings = settings[currentLevel];
+        PlayerSettings currentSettings = settings[playerCurrentLevel];
         player.SetSettings(currentSettings);
     }
 }

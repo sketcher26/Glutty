@@ -34,25 +34,17 @@ public class EnemySpawn : MonoBehaviour
             {
                 spawnPoint.x = Random.Range(xMin.x, xMax.x);
                 if (spawnSide == 0)
-                {
                     spawnPoint.y = yMax.y + offset;
-                }
                 else
-                {
                     spawnPoint.y = yMin.y - offset;
-                }
             }
             else
             {
                 spawnPoint.y = Random.Range(yMin.y, yMax.y);
                 if (spawnSide == 0)
-                {
                     spawnPoint.x = xMax.x + offset;
-                }
                 else
-                {
                     spawnPoint.x = xMin.x - offset;
-                }
             }
 
             Vector2 spawnPlace = new Vector2(spawnPoint.x, spawnPoint.y);
