@@ -8,18 +8,16 @@ public class Player : MonoBehaviour
     [SerializeField] private SpriteRenderer playerRenderer;
     [SerializeField] private PlayerSettings settings;
     [SerializeField] private UnityEvent growAction;
+    [SerializeField] private LevelUpConfig levelUpConfig;
     [SerializeField] public float movementOffset;
+    [SerializeField] private int currentLevel;
     public static int foodCount = 0;
 
-    public void SetSettings(PlayerSettings newSettings)
+    void Start()
     {
-        settings = newSettings;
-        transform.localScale = settings.scale;
-        playerRenderer.color = settings.playerColor;
-        movementOffset = settings.newMovementOffset;
-        movement.SetSpeed(settings.speed);
+        SetSettings(levelUpConfig.GetLevelSettings(currentLevel));
     }
-
+    
     void FixedUpdate()
     {
         PlayerMovement();
@@ -57,10 +55,14 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire2") && foodCount >= settings.maxFood && PlayerManager.Manager.CurrentLevel + 1 < PlayerManager.Manager.Settings.Length)
+        if (Input.GetButtonDown("Fire2") && foodCount >= settings.maxFood && levelUpConfig.HasLevelSettings(currentLevel + 1))
         {
             if (growAction != null)
                 growAction.Invoke();
+
+            currentLevel += 1;
+            var currentLevelSettings = levelUpConfig.GetLevelSettings(currentLevel);
+            SetSettings(currentLevelSettings);
 
             foodCount = 0;
             ScoreCount.foodScore = 0;
@@ -80,6 +82,15 @@ public class Player : MonoBehaviour
             AddFood();
             FoodSpawn.Instance.DestroyFood(collidedWith);
         }
+    }
+
+    public void SetSettings(PlayerSettings newSettings)
+    {
+        settings = newSettings;
+        transform.localScale = settings.scale;
+        playerRenderer.color = settings.playerColor;
+        movementOffset = settings.newMovementOffset;
+        movement.SetSpeed(settings.speed);
     }
 
     public void AddFood()

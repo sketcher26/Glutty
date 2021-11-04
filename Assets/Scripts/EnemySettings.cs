@@ -12,3 +12,7 @@ public class EnemySettings : ScriptableObject
     public float newMovementOffset;
     public Color enemyColor;
 }
+
+/*1. объеденить сеттинги
+2.переделать playerManager (лвлап)
+*/

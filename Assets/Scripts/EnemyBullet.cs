@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBullet : Bullet
 {
-    void OnTriggerEnter2D(Collider2D coll)
+    protected override void OnTriggerEnter2D(Collider2D coll)
     {
         GameObject collidedWith = coll.gameObject;
         if (collidedWith.CompareTag("Player") && Player.foodCount >= 1)
@@ -18,5 +18,5 @@ public class EnemyBullet : Bullet
             Destroy(collidedWith);
             Destroy(gameObject);
         }
-    }    
+    }
 }

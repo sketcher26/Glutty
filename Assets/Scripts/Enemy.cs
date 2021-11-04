@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,11 +11,23 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float foodCollectRadius = 15f;
     [SerializeField] private float arriveDistance = 0.5f;
     [SerializeField] private float movementOffset = 5f;
+    [SerializeField] private PlayerSettings settings;
+    [SerializeField] private SpriteRenderer enemyRenderer;
+    [SerializeField] private UnityEvent growAction;
     private bool targetAcquired;
     private Vector3 targetPos;
 
     private int foodCount = 0;
     private GameObject player;
+
+    public void SetSettings(PlayerSettings newSettings)
+    {
+        settings = newSettings;
+        transform.localScale = settings.scale;
+        enemyRenderer.color = settings.enemyColor;
+        movementOffset = settings.newMovementOffset;
+        movement.SetSpeed(settings.speed);
+    }
 
     void Awake()
     {
@@ -22,6 +35,11 @@ public class Enemy : MonoBehaviour
     }
     void FixedUpdate()
     {
+        /* if (foodCount >= settings.enemyFoodToGrow)
+        {
+            growAction.Invoke();
+        } */
+
         Vector3 worldTargetPos = GetTargetPos();
 
         Vector2 direction = (worldTargetPos - transform.position).normalized;
