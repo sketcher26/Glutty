@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-    [SerializeField] public GameObject spawnObject;
-    [SerializeField] float initialDelay;
-    [SerializeField] float repeatDelay;
-    [SerializeField] float spawnCount = 3f;
-    [SerializeField] float offset = 10f;
+    [SerializeField] private GameObject spawnObject;
+    [SerializeField] private float initialDelay;
+    [SerializeField] private float repeatDelay;
+    [SerializeField] private float spawnCount = 3f;
+    [SerializeField] private float offset = 10f;
     private GameObject[] getCount;
     public static EnemySpawn Instance;
 
@@ -18,14 +18,14 @@ public class EnemySpawn : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("ObjectSpawn", initialDelay, repeatDelay);
+        InvokeRepeating(nameof(SpawnEnemyInRandomScreenPoint), initialDelay, repeatDelay);
     }
     void Update()
     {
         getCount = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
-    void ObjectSpawn()
+    void SpawnEnemyInRandomScreenPoint()
     {
         if (getCount.Length < spawnCount)
         {
@@ -55,9 +55,12 @@ public class EnemySpawn : MonoBehaviour
             }
 
             Vector2 spawnPlace = new Vector2(spawnPoint.x, spawnPoint.y);
-            Instantiate(spawnObject, spawnPlace, Quaternion.identity);
+            SpawnEnemy(spawnPlace);
         }
     }
 
-
+    public void SpawnEnemy(Vector2 spawnPosition)
+    {
+        Instantiate(spawnObject, spawnPosition, Quaternion.identity);
+    }
 }

@@ -185,17 +185,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 3508787766233601223}
   shooting: {fileID: -1343824526108574207}
+  foodPrefab: {fileID: 3826814185552670439, guid: 209215bfe9716e24f93da2c06bd2e800, type: 3}
   foodCollectRadius: 15
   arriveDistance: 0.5
   movementOffset: 3
-  settings: {fileID: 0}
+  settings: {fileID: 11400000, guid: 115fb36ef30e30141bde29d969bb8f6b, type: 2}
   enemyRenderer: {fileID: 7565697609591053612}
   levelUpConfig: {fileID: 11400000, guid: b60ebeedb4a1dc440a50a76bc44fcca5, type: 2}
-  growAction:
-    m_PersistentCalls:
-      m_Calls: []
   currentLevel: 0
   foodCount: 0
+  spawnInterval: 3
+  foodDropRadius: 5
+  enemySpawnRadius: 5
 --- !u!114 &6142876175472149042
 MonoBehaviour:
   m_ObjectHideFlags: 0

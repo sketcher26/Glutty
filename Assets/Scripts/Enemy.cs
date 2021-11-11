@@ -8,17 +8,19 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private Movement movement;
     [SerializeField] private Shooting shooting;
+    [SerializeField] private GameObject foodPrefab;
     [SerializeField] private float foodCollectRadius = 15f;
     [SerializeField] private float arriveDistance = 0.5f;
     [SerializeField] private float movementOffset = 5f;
     [SerializeField] private PlayerSettings settings;
     [SerializeField] private SpriteRenderer enemyRenderer;
     [SerializeField] private LevelUpConfig levelUpConfig;
-    [SerializeField] private FoodSpawn foodSpawn;
     [SerializeField] private int currentLevel;
     [SerializeField] private int foodCount = 0;
-    private bool canSpawn = true;
-    private bool isQuitting;
+    [SerializeField] private int spawnInterval = 3;
+    [SerializeField] private int foodDropRadius = 5;
+    [SerializeField] private int enemySpawnRadius = 5;
+    private bool isSpawning = false;
     private bool targetAcquired;
     private Vector3 targetPos;
     private GameObject player;
@@ -35,18 +37,6 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (foodCount >= settings.maxFood && levelUpConfig.HasLevelSettings(currentLevel + 1))
-        {
-            currentLevel += 1;
-            var currentLevelSettings = levelUpConfig.GetLevelSettings(currentLevel);
-            SetSettings(currentLevelSettings);
-        }
-
-        if (currentLevel >= 2 && canSpawn)
-        {
-            StartCoroutine(SpawnEnemies(3));
-        }
-
         Vector3 worldTargetPos = GetTargetPos();
 
         Vector2 direction = (worldTargetPos - transform.position).normalized;
@@ -67,17 +57,10 @@ public class Enemy : MonoBehaviour
         CheckTargetReached(worldTargetPos);
     }
 
-    void OnApplicationQuit()
+    public void DropFood()
     {
-        isQuitting = true;
-    }
-    void OnDestroy()
-    {
-        int[] food = new int[foodCount];
-
-        if (!isQuitting)
-            foreach (int foo in food)
-                Instantiate(FoodSpawn.Instance.SpawnObject, RandomPointHelper.GetRandomPointInGameObject(transform, 5), Quaternion.identity);
+        for (int i = 0; i < foodCount; i++)
+            Instantiate(foodPrefab, RandomPointHelper.GetRandomPointAroundGameObject(transform, foodDropRadius), Quaternion.identity);
     }
 
     public void SetSettings(PlayerSettings newSettings)
@@ -124,10 +107,13 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator SpawnEnemies(int waitForSeconds)
     {
-        canSpawn = false;
-        yield return new WaitForSeconds(waitForSeconds);
-        Instantiate(EnemySpawn.Instance.spawnObject, RandomPointHelper.GetRandomPointInGameObject(transform, 5), Quaternion.identity);
-        canSpawn = true;
+        isSpawning = true;
+        while (true)
+        {
+            yield return new WaitForSeconds(waitForSeconds);
+            var spawnPoint = RandomPointHelper.GetRandomPointAroundGameObject(transform, enemySpawnRadius);
+            EnemySpawn.Instance.SpawnEnemy(spawnPoint);
+        }
     }
 
     private Vector3 GetTargetPos()
@@ -143,6 +129,18 @@ public class Enemy : MonoBehaviour
     public void AddFood()
     {
         foodCount += 1;
+
+        if (foodCount >= settings.maxFood && levelUpConfig.HasLevelSettings(currentLevel + 1))
+        {
+            currentLevel += 1;
+            var currentLevelSettings = levelUpConfig.GetLevelSettings(currentLevel);
+            SetSettings(currentLevelSettings);
+        }
+
+        if (currentLevel >= 2 && !isSpawning)
+        {
+            StartCoroutine(SpawnEnemies(spawnInterval));
+        }
     }
 
     public void RemoveFood()

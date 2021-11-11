@@ -9,6 +9,7 @@ public class PlayerBullet : Bullet
         GameObject collidedWith = coll.gameObject;
         if (collidedWith.CompareTag("Enemy"))
         {
+            collidedWith.GetComponent<Enemy>().DropFood();
             Destroy(collidedWith);
             Destroy(gameObject);
         }

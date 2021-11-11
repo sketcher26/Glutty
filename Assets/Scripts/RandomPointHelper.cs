@@ -15,16 +15,9 @@ public class RandomPointHelper
         return new Vector2(screenX, screenY);
     }
 
-    public static Vector2 GetRandomPointInGameObject(Transform transform, int offset)
+    public static Vector2 GetRandomPointAroundGameObject(Transform transform, int radius)
     {
-        var xMin = transform.position.x - offset;
-        var xMax = transform.position.x + offset;
-        var yMin = transform.position.y - offset;
-        var yMax = transform.position.y + offset;
-        float spawnX = Random.Range(xMin, xMax);
-        float spawnY = Random.Range(yMin, yMax);
-        
-        return new Vector2(spawnX, spawnY);
+        return (Vector2)transform.position + Random.insideUnitCircle * radius;
     }
 
 }
