@@ -10,14 +10,4 @@ public class PlayerSettings : ScriptableObject
     public Color playerColor;
     public int maxFood;
     public float newMovementOffset;
-    public int enemyFoodToGrow;
-    public Color enemyColor;
-
-    /* public float speed;
-    public Vector2 scale;
-    public Color playerColor;
-    public int maxFood;
-    public float newMovementOffset;
-    public Color enemyColor; */
-
 }

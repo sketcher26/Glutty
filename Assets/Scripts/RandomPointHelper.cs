@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraPositionHelper
+public class RandomPointHelper
 {
     public static Vector2 GetRandomPointInCameraBounds(float offset)
     {
@@ -13,6 +13,18 @@ public class CameraPositionHelper
         float screenY = Random.Range(min.y + offset, yMax.y - offset);
 
         return new Vector2(screenX, screenY);
+    }
+
+    public static Vector2 GetRandomPointInGameObject(Transform transform, int offset)
+    {
+        var xMin = transform.position.x - offset;
+        var xMax = transform.position.x + offset;
+        var yMin = transform.position.y - offset;
+        var yMax = transform.position.y + offset;
+        float spawnX = Random.Range(xMin, xMax);
+        float spawnY = Random.Range(yMin, yMax);
+        
+        return new Vector2(spawnX, spawnY);
     }
 
 }

@@ -13,32 +13,39 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float movementOffset = 5f;
     [SerializeField] private PlayerSettings settings;
     [SerializeField] private SpriteRenderer enemyRenderer;
-    [SerializeField] private UnityEvent growAction;
+    [SerializeField] private LevelUpConfig levelUpConfig;
+    [SerializeField] private FoodSpawn foodSpawn;
+    [SerializeField] private int currentLevel;
+    [SerializeField] private int foodCount = 0;
+    private bool canSpawn = true;
+    private bool isQuitting;
     private bool targetAcquired;
     private Vector3 targetPos;
-
-    private int foodCount = 0;
     private GameObject player;
-
-    public void SetSettings(PlayerSettings newSettings)
-    {
-        settings = newSettings;
-        transform.localScale = settings.scale;
-        enemyRenderer.color = settings.enemyColor;
-        movementOffset = settings.newMovementOffset;
-        movement.SetSpeed(settings.speed);
-    }
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
+
+    void Start()
+    {
+        SetSettings(levelUpConfig.GetLevelSettings(currentLevel));
+    }
+
     void FixedUpdate()
     {
-        /* if (foodCount >= settings.enemyFoodToGrow)
+        if (foodCount >= settings.maxFood && levelUpConfig.HasLevelSettings(currentLevel + 1))
         {
-            growAction.Invoke();
-        } */
+            currentLevel += 1;
+            var currentLevelSettings = levelUpConfig.GetLevelSettings(currentLevel);
+            SetSettings(currentLevelSettings);
+        }
+
+        if (currentLevel >= 2 && canSpawn)
+        {
+            StartCoroutine(SpawnEnemies(3));
+        }
 
         Vector3 worldTargetPos = GetTargetPos();
 
@@ -53,11 +60,33 @@ public class Enemy : MonoBehaviour
         if (canShootAtPlayer)
         {
             rotateTowardsTarget = player.transform.position;
-            shooting.ShootWithDelay();
+            shooting.EnemyShoot(1f);
         }
 
         movement.RotateTowardsTarget(rotateTowardsTarget);
         CheckTargetReached(worldTargetPos);
+    }
+
+    void OnApplicationQuit()
+    {
+        isQuitting = true;
+    }
+    void OnDestroy()
+    {
+        int[] food = new int[foodCount];
+
+        if (!isQuitting)
+            foreach (int foo in food)
+                Instantiate(FoodSpawn.Instance.SpawnObject, RandomPointHelper.GetRandomPointInGameObject(transform, 5), Quaternion.identity);
+    }
+
+    public void SetSettings(PlayerSettings newSettings)
+    {
+        settings = newSettings;
+        transform.localScale = settings.scale;
+        enemyRenderer.color = settings.playerColor;
+        movementOffset = settings.newMovementOffset;
+        movement.SetSpeed(settings.speed);
     }
 
     private void CheckTargetReached(Vector3 targetPos)
@@ -93,12 +122,20 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public IEnumerator SpawnEnemies(int waitForSeconds)
+    {
+        canSpawn = false;
+        yield return new WaitForSeconds(waitForSeconds);
+        Instantiate(EnemySpawn.Instance.spawnObject, RandomPointHelper.GetRandomPointInGameObject(transform, 5), Quaternion.identity);
+        canSpawn = true;
+    }
+
     private Vector3 GetTargetPos()
     {
         if (targetAcquired)
             return targetPos;
 
-        targetPos = CameraPositionHelper.GetRandomPointInCameraBounds(movementOffset);
+        targetPos = RandomPointHelper.GetRandomPointInCameraBounds(movementOffset);
         targetAcquired = true;
         return targetPos;
     }

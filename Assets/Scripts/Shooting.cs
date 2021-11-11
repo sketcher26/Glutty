@@ -13,25 +13,35 @@ public class Shooting : MonoBehaviour
 
     public float ShootingRange => attackRange;
 
-    public void ShootWithDelay()
+    public void EnemyShoot(float shootingDelay)
     {
         if (canShoot && bulletInst == null)
         {
-            StartCoroutine(PrepareAndShoot());
+            StartCoroutine(PrepareAndShoot(shootingDelay));
         }
     }
 
-    public void Shoot()
+    public void PlayerShoot(float shootingDelay)
     {
-        bulletInst = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
-        shot.Invoke();
+        if (canShoot)
+        {
+            StartCoroutine(ShootAndPrepare(shootingDelay));
+        }
     }
 
-    private IEnumerator PrepareAndShoot()
+    private IEnumerator PrepareAndShoot(float shootingDelay)
     {
         canShoot = false;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(shootingDelay);
         bulletInst = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
+        shot.Invoke();
+        canShoot = true;
+    }
+    private IEnumerator ShootAndPrepare(float shootingDelay)
+    {
+        canShoot = false;
+        bulletInst = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
+        yield return new WaitForSeconds(shootingDelay);
         shot.Invoke();
         canShoot = true;
     }

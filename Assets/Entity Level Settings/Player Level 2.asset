@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 183d43cad3003c642a25f793457d0024, type: 3}
-  m_Name: Settings 1
+  m_Name: Player Level 2
   m_EditorClassIdentifier: 
   speed: 30
   scale: {x: 50, y: 50}

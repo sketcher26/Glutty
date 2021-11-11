@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 183d43cad3003c642a25f793457d0024, type: 3}
-  m_Name: Settings 2
+  m_Name: Enemy Level 1
   m_EditorClassIdentifier: 
-  speed: 20
-  scale: {x: 70, y: 70}
-  playerColor: {r: 0.10594254, g: 0.972549, b: 0, a: 1}
-  maxFood: 30
-  newMovementOffset: 5.5
+  speed: 25
+  scale: {x: 30, y: 30}
+  playerColor: {r: 0.972549, g: 0.007906623, b: 0, a: 1}
+  maxFood: 2
+  newMovementOffset: 3

@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 6142876175472149042}
   - component: {fileID: 3508787766233601223}
   - component: {fileID: -1343824526108574207}
-  - component: {fileID: -2803357275733932009}
   - component: {fileID: 7076681532028508659}
   - component: {fileID: 1679641253427756074}
   m_Layer: 0
@@ -189,6 +188,14 @@ MonoBehaviour:
   foodCollectRadius: 15
   arriveDistance: 0.5
   movementOffset: 3
+  settings: {fileID: 0}
+  enemyRenderer: {fileID: 7565697609591053612}
+  levelUpConfig: {fileID: 11400000, guid: b60ebeedb4a1dc440a50a76bc44fcca5, type: 2}
+  growAction:
+    m_PersistentCalls:
+      m_Calls: []
+  currentLevel: 0
+  foodCount: 0
 --- !u!114 &6142876175472149042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,33 +260,6 @@ MonoBehaviour:
       - m_Target: {fileID: 531497285527204702}
         m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
         m_MethodName: RemoveFood
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &-2803357275733932009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6312278445802359875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbce51d0e5708124cb1362dfdeac66c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  foodCollected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 531497285527204702}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: AddFood
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

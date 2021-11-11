@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
     [SerializeField] private Shooting shooting;
     [SerializeField] private SpriteRenderer playerRenderer;
     [SerializeField] private PlayerSettings settings;
-    [SerializeField] private UnityEvent growAction;
     [SerializeField] private LevelUpConfig levelUpConfig;
     [SerializeField] public float movementOffset;
     [SerializeField] private int currentLevel;
@@ -17,7 +16,7 @@ public class Player : MonoBehaviour
     {
         SetSettings(levelUpConfig.GetLevelSettings(currentLevel));
     }
-    
+
     void FixedUpdate()
     {
         PlayerMovement();
@@ -55,23 +54,36 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire2") && foodCount >= settings.maxFood && levelUpConfig.HasLevelSettings(currentLevel + 1))
+        /* if (Input.GetButtonDown("Fire2") && foodCount >= settings.maxFood && levelUpConfig.HasLevelSettings(currentLevel + 1))
         {
-            if (growAction != null)
-                growAction.Invoke();
-
             currentLevel += 1;
             var currentLevelSettings = levelUpConfig.GetLevelSettings(currentLevel);
             SetSettings(currentLevelSettings);
 
+            ScoreCount.score += foodCount;
+
+            foodCount = 0;
+            ScoreCount.foodScore = 0;
+        } */
+
+        if (Input.GetButtonDown("Fire2") && foodCount >= settings.maxFood)
+        {
+            if (levelUpConfig.HasLevelSettings(currentLevel + 1))
+            {
+                currentLevel += 1;
+                var currentLevelSettings = levelUpConfig.GetLevelSettings(currentLevel);
+                SetSettings(currentLevelSettings);
+            }
+
+            ScoreCount.score += foodCount;
             foodCount = 0;
             ScoreCount.foodScore = 0;
         }
 
-        if (Input.GetButtonDown("Fire1") && foodCount >= 1)
-        {
-            shooting.Shoot();
-        }
+        if (Input.GetButton("Fire1") && foodCount >= 1)
+            {
+                shooting.PlayerShoot(.2f);
+            }
     }
 
     void OnTriggerEnter2D(Collider2D coll)

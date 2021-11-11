@@ -1,13 +1,20 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-    [SerializeField] GameObject spawnObject;
+    [SerializeField] public GameObject spawnObject;
     [SerializeField] float initialDelay;
     [SerializeField] float repeatDelay;
     [SerializeField] float spawnCount = 3f;
     [SerializeField] float offset = 10f;
     private GameObject[] getCount;
+    public static EnemySpawn Instance;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -51,4 +58,6 @@ public class EnemySpawn : MonoBehaviour
             Instantiate(spawnObject, spawnPlace, Quaternion.identity);
         }
     }
+
+
 }
