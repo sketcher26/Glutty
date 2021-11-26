@@ -54,18 +54,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        /* if (Input.GetButtonDown("Fire2") && foodCount >= settings.maxFood && levelUpConfig.HasLevelSettings(currentLevel + 1))
-        {
-            currentLevel += 1;
-            var currentLevelSettings = levelUpConfig.GetLevelSettings(currentLevel);
-            SetSettings(currentLevelSettings);
-
-            ScoreCount.score += foodCount;
-
-            foodCount = 0;
-            ScoreCount.foodScore = 0;
-        } */
-
         if (Input.GetButtonDown("Fire2") && foodCount >= settings.maxFood)
         {
             if (levelUpConfig.HasLevelSettings(currentLevel + 1))
