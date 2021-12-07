@@ -6,13 +6,14 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] private GameObject spawnObject;
     [SerializeField] private float initialDelay;
     [SerializeField] private float repeatDelay;
-    [SerializeField] private float spawnCount = 3f;
+    [SerializeField] private float spawnCount = 3;
     [SerializeField] private float offset = 10f;
     private GameObject[] getCount;
     public static EnemySpawn Instance;
 
     void Awake()
     {
+        spawnCount = PlayerPrefs.GetFloat("difficulty");
         Instance = this;
     }
 

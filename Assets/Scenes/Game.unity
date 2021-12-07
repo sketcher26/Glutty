@@ -612,6 +612,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &752941586 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5334800851124491796, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
+  m_PrefabInstance: {fileID: 5334800850978197569}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &917240048
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,6 +635,7 @@ GameObject:
   - component: {fileID: 917240049}
   - component: {fileID: 917240051}
   - component: {fileID: 917240052}
+  - component: {fileID: 917240053}
   m_Layer: 0
   m_Name: LevelController
   m_TagString: Untagged
@@ -676,7 +688,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnObject: {fileID: 6312278445802359875, guid: 25d3885c372b7d142979eb5d44a1c61d, type: 3}
   initialDelay: 1
-  repeatDelay: 1
+  repeatDelay: 2
   spawnCount: 1
   offset: 10
 --- !u!114 &917240052
@@ -693,6 +705,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   restart: {fileID: 256787847}
   player: {fileID: 1167726497}
+--- !u!114 &917240053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917240048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8533870e00123c14095c67e5bad26874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filler: {fileID: 662226259}
+  inGameScore: {fileID: 1997210460}
+  endGameScore: {fileID: 1127925683}
+  food: {fileID: 752941586}
 --- !u!1 &1067541175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,29 +1459,53 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5334800849359296358, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: restart
-      value: 
-      objectReference: {fileID: 256787847}
-    - target: {fileID: 5334800849359296358, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: levelUpConfig
-      value: 
-      objectReference: {fileID: 11400000, guid: 1d96694cf3563fd43a52b32c4571df73, type: 2}
-    - target: {fileID: 5334800849359296358, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: growAction.m_PersistentCalls.m_Calls.Array.size
+    - target: {fileID: 110984710324445825, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
+      propertyPath: m_FillAmount
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5334800849359296358, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: growAction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+    - target: {fileID: 299263477295543392, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
+      propertyPath: animator
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 5334800849359296358, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: growAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayerLevelUp
+    - target: {fileID: 299263477295543392, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
+      propertyPath: blinkCost
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 299263477295543392, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
+      propertyPath: blinkCoolDown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 299263477295543392, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
+      propertyPath: multiplireCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 299263477295543392, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
+      propertyPath: maxMultiplireCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 299263477295543392, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
+      propertyPath: multiplierDuration
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5334800849359296359, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334800849359296360, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334800849359296360, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
+      propertyPath: m_Color.b
+      value: 0.4528302
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334800849359296360, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
+      propertyPath: m_Color.g
+      value: 0.05258823
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334800849359296360, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
+      propertyPath: m_Color.r
+      value: 0.040583827
       objectReference: {fileID: 0}
     - target: {fileID: 5334800849359296365, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
       propertyPath: m_RootOrder
@@ -1497,42 +1549,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5334800849359296365, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5334800851107134232, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: 5334800851124491795, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: m_Name
-      value: FoodScore
-      objectReference: {fileID: 0}
-    - target: {fileID: 5334800851124491797, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: score
-      value: 
-      objectReference: {fileID: 1997210460}
-    - target: {fileID: 5334800851124491797, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: filler
-      value: 
-      objectReference: {fileID: 662226259}
-    - target: {fileID: 5334800851124491797, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: inGameScore
-      value: 
-      objectReference: {fileID: 1997210460}
-    - target: {fileID: 5334800851124491797, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: endGameScore
-      value: 
-      objectReference: {fileID: 1127925683}
-    - target: {fileID: 5334800851124491797, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: overallScore
-      value: 
-      objectReference: {fileID: 1997210460}
-    - target: {fileID: 6613341244394250797, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: m_FillAmount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6613341244394250797, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: m_PreserveAspect
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

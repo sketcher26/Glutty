@@ -185,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 3508787766233601223}
   shooting: {fileID: -1343824526108574207}
-  foodPrefab: {fileID: 3826814185552670439, guid: 209215bfe9716e24f93da2c06bd2e800, type: 3}
+  foodPrefab: {fileID: 3826814185552670439, guid: 83fb5e26c3a4b2a4c99e3d113011b639, type: 3}
   foodCollectRadius: 15
   arriveDistance: 0.5
   movementOffset: 3
@@ -197,6 +197,7 @@ MonoBehaviour:
   spawnInterval: 3
   foodDropRadius: 5
   enemySpawnRadius: 5
+  hitPoints: 0
 --- !u!114 &6142876175472149042
 MonoBehaviour:
   m_ObjectHideFlags: 0

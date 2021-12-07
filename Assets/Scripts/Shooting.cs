@@ -32,17 +32,17 @@ public class Shooting : MonoBehaviour
     private IEnumerator PrepareAndShoot(float shootingDelay)
     {
         canShoot = false;
+        shot.Invoke();
         yield return new WaitForSeconds(shootingDelay);
         bulletInst = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
-        shot.Invoke();
         canShoot = true;
     }
     private IEnumerator ShootAndPrepare(float shootingDelay)
     {
         canShoot = false;
+        shot.Invoke();
         bulletInst = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
         yield return new WaitForSeconds(shootingDelay);
-        shot.Invoke();
         canShoot = true;
     }
 }

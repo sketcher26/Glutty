@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
         GameObject collidedWith = coll.gameObject;
         if (collidedWith.CompareTag("Food") && foodCount < settings.maxFood)
         {
-            AddFood();
+            AddFood(Specials.foodMultiplier);
             FoodSpawn.Instance.DestroyFood(collidedWith);
         }
     }
@@ -102,12 +102,12 @@ public class Player : MonoBehaviour
         movement.SetSpeed(settings.speed);
     }
 
-    public void AddFood()
+    public void AddFood(int multiplier)
     {
         if (foodCount < settings.maxFood)
         {
-            ScoreCount.foodScore += 1;
-            foodCount = foodCount + 1;
+            ScoreCount.foodScore += 1 * multiplier;
+            foodCount += 1 * multiplier;
         }
     }
 
