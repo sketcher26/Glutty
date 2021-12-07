@@ -1,33 +1,37 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class RestartMenu : MonoBehaviour
 {
     [SerializeField] private GameObject restart;
     [SerializeField] private GameObject player;
-    private void Awake()
-    {
-        restart.SetActive(false);
-    }
 
     private void FixedUpdate()
     {
         if (player == null)
         {
-            restart.SetActive(true);
             Time.timeScale = 0;
+            restart.SetActive(true);
         }
     }
 
     public void RestartGame()
     {
+        if (ScoreCount.score > PlayerPrefs.GetInt("highscore"))
+            PlayerPrefs.SetInt("highscore", ScoreCount.score);
+
+        ScoreCount.score = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
     }
 
     public void MainMenu()
     {
+        if (ScoreCount.score > PlayerPrefs.GetInt("highscore"))
+            PlayerPrefs.SetInt("highscore", ScoreCount.score);
+
+        ScoreCount.score = 0;
         SceneManager.LoadScene(0);
+        Time.timeScale = 1;
     }
 }

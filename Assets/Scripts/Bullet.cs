@@ -7,6 +7,10 @@ public class Bullet : MonoBehaviour
     [SerializeField] public float speed = 10f;
     public Rigidbody2D rb;
 
+    void Awake()
+    {
+        FindObjectOfType<AudioManager>().PlayRandom("Shoot 1", "Shoot 3");
+    }
     void Start()
     {
         rb.velocity = transform.right * speed;

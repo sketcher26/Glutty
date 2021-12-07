@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
@@ -12,11 +11,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float foodCollectRadius = 15f;
     [SerializeField] private float arriveDistance = 0.5f;
     [SerializeField] private float movementOffset = 5f;
-    [SerializeField] private PlayerSettings settings;
+    [SerializeField] private EntitySettings settings;
     [SerializeField] private SpriteRenderer enemyRenderer;
     [SerializeField] private LevelUpConfig levelUpConfig;
     [SerializeField] private int currentLevel;
-    [SerializeField] private int foodCount = 0;
+    [SerializeField] public int foodCount = 0;
     [SerializeField] private int spawnInterval = 3;
     [SerializeField] private int foodDropRadius = 5;
     [SerializeField] private int enemySpawnRadius = 5;
@@ -24,7 +23,7 @@ public class Enemy : MonoBehaviour
     private bool targetAcquired;
     private Vector3 targetPos;
     private GameObject player;
-
+    public int hitPoints;
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -63,13 +62,13 @@ public class Enemy : MonoBehaviour
             Instantiate(foodPrefab, RandomPointHelper.GetRandomPointAroundGameObject(transform, foodDropRadius), Quaternion.identity);
     }
 
-    public void SetSettings(PlayerSettings newSettings)
+    public void SetSettings(EntitySettings newSettings)
     {
         settings = newSettings;
         transform.localScale = settings.scale;
         enemyRenderer.color = settings.playerColor;
-        movementOffset = settings.newMovementOffset;
         movement.SetSpeed(settings.speed);
+        hitPoints = settings.hitPoints;
     }
 
     private void CheckTargetReached(Vector3 targetPos)

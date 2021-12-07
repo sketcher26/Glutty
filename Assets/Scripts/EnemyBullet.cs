@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class EnemyBullet : Bullet
 {
+    [SerializeField] private int damage;
     protected override void OnTriggerEnter2D(Collider2D coll)
     {
         GameObject collidedWith = coll.gameObject;
-        if (collidedWith.CompareTag("Player") && Player.foodCount >= 1)
+        if (collidedWith.CompareTag("Player") && Player.foodCount >= damage)
         {
-            Player.foodCount -= 1;
-            ScoreCount.foodScore -= 1;
+            Player.foodCount -= damage;
+            ScoreCount.foodScore -= damage;
             Destroy(gameObject);
         }
-        else if (collidedWith.CompareTag("Player") && Player.foodCount <= 0)
+        else if (collidedWith.CompareTag("Player") && Player.foodCount < damage)
         {
             Destroy(collidedWith);
             Destroy(gameObject);

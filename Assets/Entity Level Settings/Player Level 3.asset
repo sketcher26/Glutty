@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   scale: {x: 70, y: 70}
-  playerColor: {r: 0.10594254, g: 0.972549, b: 0, a: 1}
+  playerColor: {r: 0.45666188, g: 0.9622642, b: 0.39489147, a: 1}
   maxFood: 30
   newMovementOffset: 5.5
+  hitPoints: 0

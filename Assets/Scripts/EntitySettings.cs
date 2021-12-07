@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Player/Settings", fileName = "Player Settings")]
-public class PlayerSettings : ScriptableObject
+[CreateAssetMenu(menuName = "Entity/Settings", fileName = "Entity Settings")]
+public class EntitySettings : ScriptableObject
 {
     public float speed;
     public Vector2 scale;
     public Color playerColor;
-    public int maxFood;
+    public float maxFood;
     public float newMovementOffset;
+    public int hitPoints;
 }

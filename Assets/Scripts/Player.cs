@@ -6,14 +6,23 @@ public class Player : MonoBehaviour
     [SerializeField] private Movement movement;
     [SerializeField] private Shooting shooting;
     [SerializeField] private SpriteRenderer playerRenderer;
-    [SerializeField] private PlayerSettings settings;
+    [SerializeField] private EntitySettings settings;
     [SerializeField] private LevelUpConfig levelUpConfig;
     [SerializeField] public float movementOffset;
     [SerializeField] private int currentLevel;
     public static int foodCount = 0;
+    public float MaxFood
+    {
+        get
+        {
+            return settings.maxFood;
+        }
+    }
+    public static Player Instance;
 
     void Start()
     {
+        Instance = this;
         SetSettings(levelUpConfig.GetLevelSettings(currentLevel));
     }
 
@@ -69,9 +78,9 @@ public class Player : MonoBehaviour
         }
 
         if (Input.GetButton("Fire1") && foodCount >= 1)
-            {
-                shooting.PlayerShoot(.2f);
-            }
+        {
+            shooting.PlayerShoot(.2f);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -84,7 +93,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void SetSettings(PlayerSettings newSettings)
+    public void SetSettings(EntitySettings newSettings)
     {
         settings = newSettings;
         transform.localScale = settings.scale;

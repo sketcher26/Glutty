@@ -17,3 +17,4 @@ MonoBehaviour:
   playerColor: {r: 0.5188679, g: 0, b: 0.2418927, a: 1}
   maxFood: 6
   newMovementOffset: 5.5
+  hitPoints: 15

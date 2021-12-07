@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   rb: {fileID: -678720751025900630}
+  damage: 5
 --- !u!58 &-3699914564729001073
 CircleCollider2D:
   m_ObjectHideFlags: 0
