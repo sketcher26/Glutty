@@ -15,6 +15,11 @@ public class Specials : MonoBehaviour
     public static int foodMultiplier = 1;
     private bool isBlinking = false;
 
+    void Start()
+    {
+        blinkCost *= (player.currentLevel + 1);
+    }
+
     void Update()
     {
         if (Input.GetButtonDown("Fire3") && multiplireCount >= maxMultiplireCount)
@@ -57,7 +62,7 @@ public class Specials : MonoBehaviour
     {
         isBlinking = true;
 
-        Player.foodCount -= blinkCost * (player.currentLevel + 1);
+        Player.foodCount -= blinkCost;
         var x = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
         var y = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
 
