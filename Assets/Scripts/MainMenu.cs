@@ -11,12 +11,15 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        SetDifficulty(PlayerPrefs.GetFloat("difficulty") - 1);
+        if(PlayerPrefs.GetFloat("difficulty") == 0)
+        PlayerPrefs.SetFloat("difficulty",1);
+        
+        SetDifficulty(PlayerPrefs.GetFloat("difficulty"));
         difficultySlider.value = PlayerPrefs.GetFloat("difficulty");
         highscore.text = "Хайскор:" + PlayerPrefs.GetInt("highscore");
         difficultySlider.onValueChanged.AddListener((v) =>
         {
-            SetDifficulty(v - 1);
+            SetDifficulty(v);
             PlayerPrefs.SetFloat("difficulty", v);
         });
     }
@@ -33,16 +36,16 @@ public class MainMenu : MonoBehaviour
 
     void SetDifficulty(float v)
     {
-        if (v == 0)
+        if (v == 1)
             difficultyText.text = "Лох";
 
-        else if (v == 1)
+        else if (v == 2)
             difficultyText.text = "Не лох";
 
-        else if (v == 2)
+        else if (v == 3)
             difficultyText.text = "Ваще не лох";
 
-        else if (v == 3)
+        else if (v == 4)
             difficultyText.text = "Игра лох";
     }
 
