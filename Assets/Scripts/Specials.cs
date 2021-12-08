@@ -6,9 +6,11 @@ public class Specials : MonoBehaviour
 {
     [SerializeField] private float maxMultiplireCount;
     [SerializeField] private Image multiplierFiller;
+    [SerializeField] private Image blinkCooldownFiller;
     [SerializeField] private float multiplierDuration;
-    [SerializeField] private float blinkCoolDown; 
+    [SerializeField] private float blinkCoolDownSeconds;
     [SerializeField] private int blinkCost;
+    [SerializeField] private Player player;
     private float multiplireCount = 0;
     public static int foodMultiplier = 1;
     private bool isBlinking = false;
@@ -23,9 +25,11 @@ public class Specials : MonoBehaviour
 
         if (Input.GetKeyDown("space") && !isBlinking && Player.foodCount >= blinkCost)
         {
-            StartCoroutine(Blink(blinkCoolDown));
+            StartCoroutine(Blink(blinkCoolDownSeconds));
+            StartCoroutine(BlinkCooldown(blinkCoolDownSeconds));
         }
     }
+
     void OnTriggerEnter2D(Collider2D coll)
     {
         var collidedWith = coll.gameObject;
@@ -38,12 +42,37 @@ public class Specials : MonoBehaviour
         multiplierFiller.fillAmount = multiplireCount / maxMultiplireCount;
     }
 
+    IEnumerator BlinkCooldown(float blinkCoolDown)
+    {
+        var nextBlink = blinkCoolDown * (player.currentLevel + 1);
+        float actualTime = nextBlink;
+        while (isBlinking)
+        {
+            actualTime -= Time.deltaTime;
+            blinkCooldownFiller.fillAmount = actualTime / nextBlink;
+            yield return null;
+        }
+    }
     public IEnumerator Blink(float blinkCoolDown)
     {
         isBlinking = true;
-        Player.foodCount -= blinkCost;
-        transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
-        yield return new WaitForSeconds(blinkCoolDown);
+
+        Player.foodCount -= blinkCost * (player.currentLevel + 1);
+        var x = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
+        var y = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
+
+        if (x >= player.xMax)
+            x = player.xMax;
+        if (x <= -player.xMax)
+            x = -player.xMax;
+        if (y >= player.yMax)
+            y = player.yMax;
+        if (y <= -player.yMax)
+            y = -player.yMax;
+
+        transform.position = new Vector3(x, y, 0);
+
+        yield return new WaitForSeconds(blinkCoolDown * (player.currentLevel + 1));
         isBlinking = false;
     }
 

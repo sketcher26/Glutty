@@ -1459,53 +1459,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 110984710324445825, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: m_FillAmount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 299263477295543392, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 299263477295543392, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: blinkCost
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 299263477295543392, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: blinkCoolDown
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 299263477295543392, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: multiplireCount
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 299263477295543392, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
       propertyPath: maxMultiplireCount
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 299263477295543392, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: multiplierDuration
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5334800849359296359, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5334800849359296360, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5334800849359296360, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: m_Color.b
-      value: 0.4528302
-      objectReference: {fileID: 0}
-    - target: {fileID: 5334800849359296360, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: m_Color.g
-      value: 0.05258823
-      objectReference: {fileID: 0}
-    - target: {fileID: 5334800849359296360, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
-      propertyPath: m_Color.r
-      value: 0.040583827
       objectReference: {fileID: 0}
     - target: {fileID: 5334800849359296365, guid: 85c6c35230d53c34195604bdd8606952, type: 3}
       propertyPath: m_RootOrder

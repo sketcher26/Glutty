@@ -9,7 +9,9 @@ public class Player : MonoBehaviour
     [SerializeField] private EntitySettings settings;
     [SerializeField] private LevelUpConfig levelUpConfig;
     [SerializeField] public float movementOffset;
-    [SerializeField] private int currentLevel;
+    [SerializeField] public int currentLevel;
+    public float xMax;
+    public float yMax;
     public static int foodCount = 0;
     public float MaxFood
     {
@@ -47,8 +49,8 @@ public class Player : MonoBehaviour
         var pos = movement.Rb.position;
         var nextPos = pos + direction * movement.speed * Time.fixedDeltaTime;
 
-        var xMax = movement.xMax - movementOffset;
-        var yMax = movement.yMax - movementOffset;
+        xMax = movement.xMax - movementOffset;
+        yMax = movement.yMax - movementOffset;
 
         if (Mathf.Abs(nextPos.x) < 0 || Mathf.Abs(nextPos.x) >= xMax)
             x = 0;

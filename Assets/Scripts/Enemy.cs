@@ -9,12 +9,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Shooting shooting;
     [SerializeField] private GameObject foodPrefab;
     [SerializeField] private float foodCollectRadius = 15f;
-    [SerializeField] private float arriveDistance = 0.5f;
+    [SerializeField] private float arrivalDistance = 0.5f;
     [SerializeField] private float movementOffset = 5f;
     [SerializeField] private EntitySettings settings;
     [SerializeField] private SpriteRenderer enemyRenderer;
     [SerializeField] private LevelUpConfig levelUpConfig;
-    [SerializeField] private int currentLevel;
+    [SerializeField] public int currentLevel;
     [SerializeField] public int foodCount = 0;
     [SerializeField] private int spawnInterval = 3;
     [SerializeField] private int foodDropRadius = 5;
@@ -73,7 +73,7 @@ public class Enemy : MonoBehaviour
 
     private void CheckTargetReached(Vector3 targetPos)
     {
-        if (Vector2.Distance(transform.position, targetPos) < arriveDistance)
+        if (Vector2.Distance(transform.position, targetPos) < arrivalDistance)
         {
             targetAcquired = false;
         }

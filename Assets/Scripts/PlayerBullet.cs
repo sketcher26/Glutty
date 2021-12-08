@@ -25,6 +25,8 @@ public class PlayerBullet : Bullet
 
                 FindObjectOfType<AudioManager>().PlayRandom("Collision 1", "Collision 4");
 
+                ScoreCount.score += enemy.currentLevel + 1;
+                
                 Destroy(collidedWith);
                 Destroy(gameObject);
             }

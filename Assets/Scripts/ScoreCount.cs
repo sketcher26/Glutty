@@ -11,6 +11,7 @@ public class ScoreCount : MonoBehaviour
     [SerializeField] Text endGameScore;
     [SerializeField] TMP_Text food;
 
+
     void Update()
     {
         foodScore = Player.foodCount;

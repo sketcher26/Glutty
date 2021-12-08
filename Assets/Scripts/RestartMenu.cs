@@ -21,6 +21,8 @@ public class RestartMenu : MonoBehaviour
             PlayerPrefs.SetInt("highscore", ScoreCount.score);
 
         ScoreCount.score = 0;
+        Player.foodCount = 0;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
     }
@@ -31,6 +33,8 @@ public class RestartMenu : MonoBehaviour
             PlayerPrefs.SetInt("highscore", ScoreCount.score);
 
         ScoreCount.score = 0;
+        Player.foodCount = 0;
+
         SceneManager.LoadScene(0);
         Time.timeScale = 1;
     }
