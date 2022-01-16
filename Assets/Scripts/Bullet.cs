@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
@@ -9,7 +7,7 @@ public class Bullet : MonoBehaviour
 
     void Awake()
     {
-        FindObjectOfType<AudioManager>().PlayRandom("Shoot 1", "Shoot 3");
+        FindObjectOfType<AudioManager>().Play(SoundType.Shot);
     }
     void Start()
     {

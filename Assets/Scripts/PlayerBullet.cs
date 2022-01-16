@@ -1,5 +1,4 @@
-﻿using UnityEngine.Events;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerBullet : Bullet
 {
@@ -14,7 +13,7 @@ public class PlayerBullet : Bullet
             {
                 enemy.hitPoints -= damage;
 
-                FindObjectOfType<AudioManager>().PlayRandom("Collision 1", "Collision 4");
+                FindObjectOfType<AudioManager>().Play(SoundType.Collision);
 
                 Destroy(gameObject);
 
@@ -23,7 +22,7 @@ public class PlayerBullet : Bullet
             {
                 collidedWith.GetComponent<Enemy>().DropFood();
 
-                FindObjectOfType<AudioManager>().PlayRandom("Collision 1", "Collision 4");
+                FindObjectOfType<AudioManager>().Play(SoundType.Collision);
 
                 ScoreCount.score += enemy.currentLevel + 1;
                 
@@ -31,6 +30,5 @@ public class PlayerBullet : Bullet
                 Destroy(gameObject);
             }
         }
-
     }
 }

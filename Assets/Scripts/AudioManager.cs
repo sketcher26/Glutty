@@ -1,38 +1,62 @@
 ﻿using UnityEngine;
-using System;
+using System.Collections.Generic;
+
+public enum SoundType { Shot, Collision, Theme }
 
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
-    
-    void Awake()
-    {
-        foreach (Sound s in sounds)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
+    private List<AudioSource> playingSounds = new List<AudioSource>();
 
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-        }
-    }
-    
     void Start()
     {
-        Play("Theme");
+        Play(SoundType.Theme);
     }
 
-    public void Play(string name)
+    public void Play(SoundType type)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        s.source.Play();
+        var source = GetEmptyAudioSource();
+        var sound = GetRandomSoundOfType(type);
+
+        source.clip = sound.clip;
+
+        source.volume = sound.volume;
+        source.pitch = sound.pitch;
+        source.loop = sound.loop;
+
+        source.Play();
     }
-    public void PlayRandom(string nameFirst, string nameLast)
+
+    private Sound GetRandomSoundOfType(SoundType type)
     {
-        Sound first = Array.Find(sounds, sound => sound.name == nameFirst);
-        Sound last = Array.Find(sounds, sound => sound.name == nameLast);
-        Sound s = sounds[UnityEngine.Random.Range(Array.IndexOf(sounds, first), Array.IndexOf(sounds, last) + 1)];
-        s.source.Play();
+        var soundTypeList = new List<Sound>();
+
+        foreach (Sound s in sounds)
+        {
+            if (s.soundType == type)
+            {
+                soundTypeList.Add(s);
+            }
+        }
+        int soundIndex = Random.Range(0, soundTypeList.Count);
+        return soundTypeList[soundIndex];
+    }
+
+    private AudioSource GetEmptyAudioSource()
+    {
+        foreach (AudioSource ps in playingSounds)
+        {
+            if (!ps.isPlaying)
+            {
+                return ps;
+            }
+        }
+
+        var newSound = gameObject.AddComponent<AudioSource>();
+        playingSounds.Add(newSound);
+        return newSound;
     }
 }
+
+
+

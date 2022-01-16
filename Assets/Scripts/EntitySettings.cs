@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Entity/Settings", fileName = "Entity Settings")]
 public class EntitySettings : ScriptableObject

@@ -108,6 +108,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -116,9 +117,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -139,6 +140,8 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
@@ -782,6 +785,35 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Minifantasy_ForgottenPlainsTiles_5: -405098324259038093
+      Minifantasy_ForgottenPlainsTiles_3: 9217061925416098833
+      Minifantasy_ForgottenPlainsTiles_2: 6194187767919663805
+      Minifantasy_ForgottenPlainsTiles_27: -4271812543496821812
+      Minifantasy_ForgottenPlainsTiles_6: -6510359806332002992
+      Minifantasy_ForgottenPlainsTiles_7: 4455865136271514690
+      Minifantasy_ForgottenPlainsTiles_11: -4416118572682991526
+      Minifantasy_ForgottenPlainsTiles_15: 5261281921886370080
+      Minifantasy_ForgottenPlainsTiles_26: -5524295968405812971
+      Minifantasy_ForgottenPlainsTiles_16: -4043459509603987514
+      Minifantasy_ForgottenPlainsTiles_22: -8988517981366986819
+      Minifantasy_ForgottenPlainsTiles_1: 8170302452853305954
+      Minifantasy_ForgottenPlainsTiles_25: -7451596547521832489
+      Minifantasy_ForgottenPlainsTiles_8: -526908632251229320
+      Minifantasy_ForgottenPlainsTiles_14: 5444163818856308123
+      Minifantasy_ForgottenPlainsTiles_9: -4914212286587763718
+      Minifantasy_ForgottenPlainsTiles_17: -696654465008527618
+      Minifantasy_ForgottenPlainsTiles_13: 5402989614622835303
+      Minifantasy_ForgottenPlainsTiles_20: 2634119036987483898
+      Minifantasy_ForgottenPlainsTiles_10: 2074992903299538766
+      Minifantasy_ForgottenPlainsTiles_23: -322706168206865058
+      Minifantasy_ForgottenPlainsTiles_0: -8163881058519588145
+      Minifantasy_ForgottenPlainsTiles_19: 4959342113610361446
+      Minifantasy_ForgottenPlainsTiles_21: -1875059082174145934
+      Minifantasy_ForgottenPlainsTiles_12: 5814508574505517240
+      Minifantasy_ForgottenPlainsTiles_24: 2975530826323893400
+      Minifantasy_ForgottenPlainsTiles_4: -7910306303201999464
+      Minifantasy_ForgottenPlainsTiles_18: -6723554196787993037
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
